@@ -11,282 +11,269 @@
     body {
       font-family: 'Nunito Sans', sans-serif;
       min-height: 100vh;
-      background: linear-gradient(180deg, #4ec8f4 0%, #7dd9f7 40%, #a8edff 65%, #c6f0a0 80%, #78c850 100%);
+      background: linear-gradient(180deg, #4ec8f4 0%, #7dd9f7 38%, #a8edff 60%, #c6f0a0 75%, #78c850 100%);
       overflow-x: hidden;
       position: relative;
+      padding-bottom: 220px;
     }
 
-    /* ── Decorative doodles ── */
-    .doodle {
-      position: absolute;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* Clouds */
+    /* ── Clouds ── */
+    .doodle { position: absolute; pointer-events: none; user-select: none; }
     .cloud {
-      background: white;
-      border-radius: 50px;
-      opacity: 0.85;
+      background: white; border-radius: 50px; opacity: 0.88;
       animation: drift 8s ease-in-out infinite;
     }
-    .cloud::before, .cloud::after {
-      content: '';
-      background: white;
+    .cloud::before, .cloud::after { content:''; background:white; border-radius:50%; position:absolute; }
+    .cloud-1 { width:90px;height:30px;top:8%;left:5%; }
+    .cloud-1::before{width:40px;height:40px;top:-20px;left:12px;}
+    .cloud-1::after{width:28px;height:28px;top:-12px;left:40px;}
+    .cloud-2 { width:70px;height:24px;top:18%;right:8%;animation-delay:2s; }
+    .cloud-2::before{width:32px;height:32px;top:-16px;left:10px;}
+    .cloud-2::after{width:22px;height:22px;top:-10px;left:32px;}
+    .cloud-3 { width:80px;height:26px;top:50%;left:2%;opacity:0.7;animation-delay:4s; }
+    .cloud-3::before{width:36px;height:36px;top:-18px;left:10px;}
+    .cloud-3::after{width:26px;height:26px;top:-12px;left:36px;}
+    .cloud-4 { width:60px;height:20px;top:58%;right:4%;opacity:0.7;animation-delay:1s; }
+    .cloud-4::before{width:28px;height:28px;top:-14px;left:8px;}
+    .cloud-4::after{width:20px;height:20px;top:-8px;left:28px;}
+    @keyframes drift { 0%,100%{transform:translateX(0)} 50%{transform:translateX(8px)} }
+
+    /* ── Ground scene ── */
+    .ground-scene {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 220px;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* layered hills */
+    .hill {
+      position: absolute;
       border-radius: 50%;
+      bottom: 0;
+    }
+    .hill-back  { width:140%; height:180px; background:#5ab832; left:-20%; bottom:-30px; }
+    .hill-mid   { width:80%;  height:130px; background:#63cc38; left:-5%;  bottom:-10px; }
+    .hill-mid2  { width:70%;  height:110px; background:#63cc38; right:-5%; bottom:-10px; }
+    .hill-front { width:110%; height:80px;  background:#78d944; left:-5%;  bottom:0; }
+
+    /* path */
+    .path {
       position: absolute;
-    }
-    .cloud-1 { width: 90px; height: 30px; top: 8%; left: 5%; }
-    .cloud-1::before { width: 40px; height: 40px; top: -20px; left: 12px; }
-    .cloud-1::after  { width: 28px; height: 28px; top: -12px; left: 40px; }
-
-    .cloud-2 { width: 70px; height: 24px; top: 18%; right: 8%; animation-delay: 2s; }
-    .cloud-2::before { width: 32px; height: 32px; top: -16px; left: 10px; }
-    .cloud-2::after  { width: 22px; height: 22px; top: -10px; left: 32px; }
-
-    .cloud-3 { width: 80px; height: 26px; top: 50%; left: 2%; opacity: 0.7; animation-delay: 4s; }
-    .cloud-3::before { width: 36px; height: 36px; top: -18px; left: 10px; }
-    .cloud-3::after  { width: 26px; height: 26px; top: -12px; left: 36px; }
-
-    .cloud-4 { width: 60px; height: 20px; top: 58%; right: 4%; opacity: 0.7; animation-delay: 1s; }
-    .cloud-4::before { width: 28px; height: 28px; top: -14px; left: 8px; }
-    .cloud-4::after  { width: 20px; height: 20px; top: -8px; left: 28px; }
-
-    @keyframes drift {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(8px); }
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 70px;
+      background: #c8a96e;
+      border-radius: 50% 50% 0 0 / 60% 60% 0 0;
     }
 
-    /* Stars */
-    .star { animation: twinkle 3s ease-in-out infinite; }
-    @keyframes twinkle {
-      0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-      50% { transform: scale(1.15) rotate(10deg); opacity: 0.8; }
-    }
-
-    /* Sparkle dots */
-    .sparkle { font-size: 20px; animation: sparkle-pop 2s ease-in-out infinite; }
-    .sparkle-1 { top: 22%; left: 14%; animation-delay: 0s; }
-    .sparkle-2 { top: 30%; right: 12%; animation-delay: 0.7s; }
-    .sparkle-3 { top: 65%; left: 8%; animation-delay: 1.4s; }
-    @keyframes sparkle-pop {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.3); opacity: 0.6; }
-    }
-
-    /* "HEY!" speech bubble */
-    .hey-bubble {
+    /* flowers */
+    .flower {
       position: absolute;
-      top: 6%;
-      right: 6%;
-      background: white;
-      border: 3px solid #333;
-      border-radius: 16px;
-      padding: 8px 14px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: 18px;
-      color: #ff5c8a;
-      box-shadow: 3px 3px 0 #333;
+      bottom: 58px;
+      font-size: 22px;
+      animation: flower-sway 3s ease-in-out infinite;
     }
-    .hey-bubble::after {
-      content: '';
-      position: absolute;
-      bottom: -14px;
-      left: 14px;
-      border: 7px solid transparent;
-      border-top-color: #333;
-    }
-    .hey-bubble::before {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 16px;
-      border: 5px solid transparent;
-      border-top-color: white;
-      z-index: 1;
+    @keyframes flower-sway {
+      0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)}
     }
 
-    /* Paper plane */
-    .plane {
+    /* mushrooms */
+    .shroom {
       position: absolute;
-      top: 28%;
-      right: 7%;
-      animation: plane-fly 6s ease-in-out infinite;
+      bottom: 58px;
+      font-size: 26px;
+      animation: shroom-bob 4s ease-in-out infinite;
     }
-    @keyframes plane-fly {
-      0%, 100% { transform: translate(0, 0) rotate(-10deg); }
-      50% { transform: translate(-6px, -8px) rotate(-5deg); }
+    @keyframes shroom-bob {
+      0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)}
     }
 
-    /* Rocket */
-    .rocket {
+    /* grass tufts using SVG inline */
+    .grass-tuft {
       position: absolute;
-      top: 55%;
-      right: 5%;
-      font-size: 40px;
-      animation: rocket-bounce 3s ease-in-out infinite;
-    }
-    @keyframes rocket-bounce {
-      0%, 100% { transform: translateY(0) rotate(-20deg); }
-      50% { transform: translateY(-10px) rotate(-20deg); }
+      bottom: 58px;
     }
 
-    /* Bottom characters */
-    .dino { position: absolute; bottom: 0; left: 2%; font-size: 60px; }
-    .dog  { position: absolute; bottom: 0; right: 3%; font-size: 55px; }
-
-    /* "Yo!" and heart bubbles */
-    .yo-bubble {
+    /* characters */
+    .char {
       position: absolute;
-      bottom: 12%;
-      left: 3%;
+      bottom: 52px;
+      font-size: 52px;
+      animation: char-bounce 3s ease-in-out infinite;
+    }
+    @keyframes char-bounce {
+      0%,100%{transform:translateY(0) scaleX(1)} 50%{transform:translateY(-8px) scaleX(1)}
+    }
+    .char-flip { transform: scaleX(-1); display:inline-block; }
+
+    /* speech bubbles on characters */
+    .char-bubble {
+      position: absolute;
       background: white;
       border: 2.5px solid #333;
       border-radius: 12px;
-      padding: 4px 10px;
+      padding: 4px 9px;
       font-family: 'Nunito', sans-serif;
       font-weight: 900;
-      font-size: 14px;
+      font-size: 13px;
       color: #333;
       box-shadow: 2px 2px 0 #333;
+      white-space: nowrap;
+    }
+    .char-bubble::after {
+      content:'';
+      position:absolute;
+      bottom:-10px; left:12px;
+      border:5px solid transparent;
+      border-top-color:#333;
+    }
+    .char-bubble::before {
+      content:'';
+      position:absolute;
+      bottom:-6px; left:14px;
+      border:4px solid transparent;
+      border-top-color:white;
+      z-index:1;
+    }
+
+    /* butterfly */
+    .butterfly {
+      position: absolute;
+      font-size: 24px;
+      animation: flutter 4s ease-in-out infinite;
+    }
+    @keyframes flutter {
+      0%{transform:translate(0,0) rotate(-10deg)}
+      25%{transform:translate(10px,-15px) rotate(5deg)}
+      50%{transform:translate(20px,0px) rotate(-10deg)}
+      75%{transform:translate(10px,10px) rotate(5deg)}
+      100%{transform:translate(0,0) rotate(-10deg)}
+    }
+
+    /* birds */
+    .bird {
+      position: absolute;
+      font-size: 18px;
+      animation: bird-fly 6s ease-in-out infinite;
+    }
+    @keyframes bird-fly {
+      0%,100%{transform:translate(0,0)}
+      50%{transform:translate(14px,-10px)}
+    }
+
+    /* ── Stars & sparkles ── */
+    .star-svg { position:absolute; animation:twinkle 3s ease-in-out infinite; }
+    @keyframes twinkle {
+      0%,100%{transform:scale(1) rotate(0deg);opacity:1}
+      50%{transform:scale(1.15) rotate(10deg);opacity:0.8}
+    }
+    .sparkle { position:absolute; font-size:20px; animation:sparkle-pop 2s ease-in-out infinite; }
+    .sparkle-1{top:22%;left:14%;animation-delay:0s}
+    .sparkle-2{top:30%;right:12%;animation-delay:0.7s}
+    .sparkle-3{top:65%;left:8%;animation-delay:1.4s}
+    @keyframes sparkle-pop {
+      0%,100%{transform:scale(1);opacity:1}
+      50%{transform:scale(1.3);opacity:0.6}
+    }
+
+    /* HEY bubble */
+    .hey-bubble {
+      position:absolute; top:6%; right:6%;
+      background:white; border:3px solid #333; border-radius:16px;
+      padding:8px 14px;
+      font-family:'Nunito',sans-serif; font-weight:900; font-size:18px; color:#ff5c8a;
+      box-shadow:3px 3px 0 #333;
+    }
+    .hey-bubble::after { content:''; position:absolute; bottom:-14px; left:14px; border:7px solid transparent; border-top-color:#333; }
+    .hey-bubble::before { content:''; position:absolute; bottom:-10px; left:16px; border:5px solid transparent; border-top-color:white; z-index:1; }
+
+    /* plane */
+    .plane { position:absolute; top:28%; right:7%; animation:plane-fly 6s ease-in-out infinite; }
+    @keyframes plane-fly {
+      0%,100%{transform:translate(0,0) rotate(-10deg)}
+      50%{transform:translate(-6px,-8px) rotate(-5deg)}
+    }
+
+    /* rocket */
+    .rocket { position:absolute; top:52%; right:5%; font-size:40px; animation:rocket-bounce 3s ease-in-out infinite; }
+    @keyframes rocket-bounce {
+      0%,100%{transform:translateY(0) rotate(-20deg)}
+      50%{transform:translateY(-10px) rotate(-20deg)}
     }
 
     /* ── Main content ── */
     .page {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 50px 20px 100px;
-      min-height: 100vh;
+      position:relative; z-index:10;
+      display:flex; flex-direction:column; align-items:center;
+      padding:50px 20px 40px;
+      min-height:100vh;
     }
 
-    /* Title */
     .title {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: clamp(36px, 8vw, 58px);
-      letter-spacing: -1px;
-      line-height: 1;
-      margin-bottom: 10px;
-      text-align: center;
-      -webkit-text-stroke: 2.5px #333;
-      paint-order: stroke fill;
+      font-family:'Nunito',sans-serif; font-weight:900;
+      font-size:clamp(36px,8vw,58px); letter-spacing:-1px; line-height:1;
+      margin-bottom:10px; text-align:center;
+      -webkit-text-stroke:2.5px #333; paint-order:stroke fill;
     }
-    .title .yellow { color: #ffd62e; }
-    .title .white  { color: #ffffff; }
+    .title .yellow{color:#ffd62e}
+    .title .white{color:#ffffff}
 
     .subtitle {
-      font-family: 'Nunito Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(14px, 3.5vw, 18px);
-      color: #1a3a4a;
-      margin-bottom: 36px;
-      text-align: center;
+      font-family:'Nunito Sans',sans-serif; font-weight:600;
+      font-size:clamp(14px,3.5vw,18px); color:#1a3a4a;
+      margin-bottom:36px; text-align:center;
     }
 
-    /* ── Link buttons ── */
-    .links { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 18px; }
+    .links { width:100%; max-width:400px; display:flex; flex-direction:column; gap:18px; }
 
     .link-btn {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      border-radius: 50px;
-      padding: 10px 14px;
-      border: 3px solid #1a1a1a;
-      box-shadow: 4px 5px 0 #1a1a1a;
-      transition: transform 0.15s, box-shadow 0.15s;
-      position: relative;
+      display:flex; align-items:center; text-decoration:none;
+      border-radius:50px; padding:10px 14px;
+      border:3px solid #1a1a1a; box-shadow:4px 5px 0 #1a1a1a;
+      transition:transform 0.15s, box-shadow 0.15s;
     }
-    .link-btn:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 7px 0 #1a1a1a;
-    }
-    .link-btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 #1a1a1a;
-    }
+    .link-btn:hover { transform:translate(-2px,-2px); box-shadow:6px 7px 0 #1a1a1a; }
+    .link-btn:active { transform:translate(2px,2px); box-shadow:2px 2px 0 #1a1a1a; }
 
     .btn-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2.5px solid rgba(0,0,0,0.25);
-      flex-shrink: 0;
-      margin-right: 14px;
+      width:48px; height:48px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      border:2.5px solid rgba(0,0,0,0.25);
+      flex-shrink:0; margin-right:14px;
+      background:rgba(255,255,255,0.2);
     }
-    .btn-icon svg { width: 26px; height: 26px; }
+    .btn-icon svg{width:26px;height:26px}
 
-    .btn-text { flex: 1; }
+    .btn-text{flex:1}
     .btn-name {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: 20px;
-      color: white;
-      -webkit-text-stroke: 0.5px rgba(0,0,0,0.3);
-      display: block;
-      line-height: 1.1;
+      font-family:'Nunito',sans-serif; font-weight:900; font-size:20px;
+      color:white; -webkit-text-stroke:0.5px rgba(0,0,0,0.3);
+      display:block; line-height:1.1;
     }
-    .btn-sub {
-      font-family: 'Nunito Sans', sans-serif;
-      font-weight: 600;
-      font-size: 12px;
-      color: rgba(255,255,255,0.88);
-      display: block;
-      margin-top: 2px;
-    }
+    .btn-sub { font-family:'Nunito Sans',sans-serif; font-weight:600; font-size:12px; color:rgba(255,255,255,0.88); display:block; margin-top:2px; }
 
     .btn-arrow {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.2);
-      border: 2px solid rgba(255,255,255,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width:36px; height:36px; border-radius:50%;
+      background:rgba(0,0,0,0.2); border:2px solid rgba(255,255,255,0.5);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
     }
-    .btn-arrow svg { width: 18px; height: 18px; }
+    .btn-arrow svg{width:18px;height:18px}
 
-    /* Per-platform colors */
-    .btn-yt   { background: linear-gradient(135deg, #ff3b3b, #e60000); }
-    .btn-yt .btn-icon { background: rgba(255,255,255,0.2); }
+    .btn-yt  { background:linear-gradient(135deg,#ff3b3b,#e60000); }
+    .btn-li  { background:linear-gradient(135deg,#2177c2,#0a5fa8); }
+    .btn-ig  { background:linear-gradient(135deg,#f9a825,#e91e8c,#9c27b0); }
 
-    .btn-li   { background: linear-gradient(135deg, #2177c2, #0a5fa8); }
-    .btn-li .btn-icon { background: rgba(255,255,255,0.2); }
-
-    .btn-ig   { background: linear-gradient(135deg, #f9a825, #e91e8c, #9c27b0); }
-    .btn-ig .btn-icon { background: rgba(255,255,255,0.2); }
-
-    /* "Let's connect!" pill */
     .connect-pill {
-      margin-top: 32px;
-      background: white;
-      border: 2.5px solid #333;
-      border-radius: 50px;
-      padding: 10px 28px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 16px;
-      color: #333;
-      box-shadow: 3px 3px 0 #333;
+      margin-top:32px;
+      background:white; border:2.5px solid #333; border-radius:50px;
+      padding:10px 28px;
+      font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:#333;
+      box-shadow:3px 3px 0 #333;
     }
-
-    /* Hearts row */
-    .hearts { margin-top: 14px; font-size: 20px; letter-spacing: 6px; }
-
-    /* Star doodle SVG helper */
-    .star-svg {
-      position: absolute;
-      animation: twinkle 3s ease-in-out infinite;
-    }
+    .hearts { margin-top:14px; font-size:20px; letter-spacing:6px; }
   </style>
 </head>
 <body>
@@ -297,29 +284,36 @@
   <div class="doodle cloud cloud-3"></div>
   <div class="doodle cloud cloud-4"></div>
 
-  <!-- HEY! bubble -->
+  <!-- HEY! -->
   <div class="hey-bubble">HEY!</div>
 
   <!-- Stars -->
-  <svg class="doodle star-svg" style="top:15%;left:7%;animation-delay:0s;" width="38" height="38" viewBox="0 0 38 38">
+  <svg class="doodle star-svg" style="top:15%;left:7%;animation-delay:0s" width="38" height="38" viewBox="0 0 38 38">
     <polygon points="19,2 23,14 36,14 26,22 30,34 19,27 8,34 12,22 2,14 15,14" fill="#ffd62e" stroke="#e6a800" stroke-width="1.5"/>
-    <circle cx="16" cy="16" r="3" fill="#fff8" />
-    <text x="11" y="21" font-size="9" font-family="sans-serif" fill="#e6a800">^v^</text>
+    <circle cx="16" cy="16" r="3" fill="#fff8"/>
   </svg>
-  <svg class="doodle star-svg" style="top:12%;left:16%;animation-delay:1.5s;" width="22" height="22" viewBox="0 0 22 22">
+  <svg class="doodle star-svg" style="top:12%;left:16%;animation-delay:1.5s" width="22" height="22" viewBox="0 0 22 22">
     <polygon points="11,1 13,8 20,8 15,13 17,20 11,16 5,20 7,13 2,8 9,8" fill="#ffd62e" stroke="#e6a800" stroke-width="1"/>
   </svg>
-  <svg class="doodle star-svg" style="top:38%;left:4%;animation-delay:0.8s;" width="18" height="18" viewBox="0 0 18 18">
+  <svg class="doodle star-svg" style="top:38%;left:4%;animation-delay:0.8s" width="18" height="18" viewBox="0 0 18 18">
     <polygon points="9,1 11,7 17,7 12,11 14,17 9,13 4,17 6,11 1,7 7,7" fill="#ffd62e" stroke="#e6a800" stroke-width="1"/>
   </svg>
-  <svg class="doodle star-svg" style="top:62%;right:12%;animation-delay:0.4s;" width="22" height="22" viewBox="0 0 22 22">
+  <svg class="doodle star-svg" style="top:62%;right:12%;animation-delay:0.4s" width="22" height="22" viewBox="0 0 22 22">
     <polygon points="11,1 13,8 20,8 15,13 17,20 11,16 5,20 7,13 2,8 9,8" fill="#ffd62e" stroke="#e6a800" stroke-width="1"/>
   </svg>
+  <!-- extra stars -->
+  <svg class="doodle star-svg" style="top:44%;right:6%;animation-delay:1s" width="16" height="16" viewBox="0 0 16 16">
+    <polygon points="8,1 10,6 15,6 11,9 13,14 8,11 3,14 5,9 1,6 6,6" fill="#ffd62e" stroke="#e6a800" stroke-width="1"/>
+  </svg>
+  <svg class="doodle star-svg" style="top:20%;left:44%;animation-delay:2s" width="14" height="14" viewBox="0 0 14 14">
+    <polygon points="7,1 9,5 13,5 10,8 11,12 7,10 3,12 4,8 1,5 5,5" fill="#ffe066" stroke="#e6a800" stroke-width="1"/>
+  </svg>
 
-  <!-- Sparkle crosses -->
+  <!-- Sparkles -->
   <span class="doodle sparkle sparkle-1">✦</span>
   <span class="doodle sparkle sparkle-2">✦</span>
   <span class="doodle sparkle sparkle-3">✦</span>
+  <span class="doodle sparkle" style="top:48%;right:16%;animation-delay:1s;font-size:14px">✦</span>
 
   <!-- Paper plane -->
   <svg class="plane" width="44" height="36" viewBox="0 0 44 36">
@@ -332,24 +326,116 @@
   <div class="rocket">🚀</div>
 
   <!-- Lightning bolt -->
-  <svg class="doodle" style="top:67%;right:2%;animation:twinkle 2s ease-in-out infinite;" width="28" height="44" viewBox="0 0 28 44">
+  <svg class="doodle" style="top:67%;right:2%;animation:twinkle 2s ease-in-out infinite" width="28" height="44" viewBox="0 0 28 44">
     <polygon points="16,0 4,22 14,22 10,44 24,18 14,18" fill="#ffd62e" stroke="#e6a800" stroke-width="1.5" stroke-linejoin="round"/>
   </svg>
 
-  <!-- "Yo!" bubble -->
-  <div class="yo-bubble">Yo!</div>
+  <!-- Butterflies -->
+  <span class="doodle butterfly" style="top:35%;left:6%;animation-delay:0s">🦋</span>
+  <span class="doodle butterfly" style="top:42%;right:18%;animation-delay:1.5s;font-size:18px">🦋</span>
 
-  <!-- Bottom characters -->
-  <div class="dino">🦖</div>
-  <div class="dog">🐕</div>
+  <!-- Birds -->
+  <span class="doodle bird" style="top:10%;left:38%;animation-delay:0s">🐦</span>
+  <span class="doodle bird" style="top:7%;left:48%;animation-delay:1s;font-size:14px">🐦</span>
 
-  <!-- Heart bubble (bottom right) -->
-  <svg class="doodle" style="bottom:14%;right:14%;" width="50" height="44" viewBox="0 0 50 44">
-    <rect x="1" y="1" width="48" height="34" rx="12" fill="white" stroke="#333" stroke-width="2.5"/>
-    <text x="25" y="22" text-anchor="middle" font-size="16">💗</text>
-    <polygon points="10,35 18,35 14,43" fill="white" stroke="#333" stroke-width="2" stroke-linejoin="round"/>
-    <line x1="10" y1="35" x2="18" y2="35" stroke="white" stroke-width="3"/>
-  </svg>
+  <!-- Balloons -->
+  <span class="doodle" style="top:5%;left:28%;font-size:28px;animation:rocket-bounce 4s ease-in-out infinite;animation-delay:0.5s">🎈</span>
+  <span class="doodle" style="top:3%;left:35%;font-size:22px;animation:rocket-bounce 4s ease-in-out infinite;animation-delay:1.2s">🎈</span>
+
+  <!-- ── GROUND SCENE ── -->
+  <div class="ground-scene">
+
+    <!-- Hills -->
+    <div class="hill hill-back"></div>
+    <div class="hill hill-mid"></div>
+    <div class="hill hill-mid2"></div>
+    <div class="hill hill-front"></div>
+
+    <!-- Dirt path -->
+    <div class="path"></div>
+
+    <!-- Grass tufts SVG -->
+    <svg class="grass-tuft" style="left:8%" width="30" height="28" viewBox="0 0 30 28">
+      <line x1="15" y1="28" x2="10" y2="4" stroke="#3a9a18" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="15" y1="28" x2="15" y2="2" stroke="#45b820" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="15" y1="28" x2="20" y2="4" stroke="#3a9a18" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="grass-tuft" style="left:22%" width="30" height="28" viewBox="0 0 30 28">
+      <line x1="15" y1="28" x2="10" y2="6" stroke="#3a9a18" stroke-width="2" stroke-linecap="round"/>
+      <line x1="15" y1="28" x2="15" y2="4" stroke="#45b820" stroke-width="2" stroke-linecap="round"/>
+      <line x1="15" y1="28" x2="20" y2="6" stroke="#3a9a18" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <svg class="grass-tuft" style="right:18%" width="30" height="28" viewBox="0 0 30 28">
+      <line x1="15" y1="28" x2="10" y2="6" stroke="#3a9a18" stroke-width="2" stroke-linecap="round"/>
+      <line x1="15" y1="28" x2="15" y2="4" stroke="#45b820" stroke-width="2" stroke-linecap="round"/>
+      <line x1="15" y1="28" x2="20" y2="6" stroke="#3a9a18" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <svg class="grass-tuft" style="right:8%" width="30" height="28" viewBox="0 0 30 28">
+      <line x1="15" y1="28" x2="10" y2="4" stroke="#3a9a18" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="15" y1="28" x2="15" y2="2" stroke="#45b820" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="15" y1="28" x2="20" y2="4" stroke="#3a9a18" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+
+    <!-- Flowers -->
+    <span class="flower" style="left:12%;animation-delay:0s">🌸</span>
+    <span class="flower" style="left:18%;animation-delay:0.5s">🌼</span>
+    <span class="flower" style="left:26%;animation-delay:1s">🌺</span>
+    <span class="flower" style="right:14%;animation-delay:0.3s">🌸</span>
+    <span class="flower" style="right:20%;animation-delay:0.8s">🌼</span>
+    <span class="flower" style="right:28%;animation-delay:1.3s">🌻</span>
+    <span class="flower" style="left:40%;animation-delay:0.6s;font-size:16px">🌷</span>
+    <span class="flower" style="right:40%;animation-delay:1.1s;font-size:16px">🌷</span>
+
+    <!-- Mushrooms -->
+    <span class="shroom" style="left:32%;animation-delay:0.4s">🍄</span>
+    <span class="shroom" style="right:32%;animation-delay:1.2s">🍄</span>
+
+    <!-- Trees -->
+    <span class="doodle" style="bottom:55px;left:1%;font-size:58px;animation:flower-sway 5s ease-in-out infinite">🌳</span>
+    <span class="doodle" style="bottom:55px;right:1%;font-size:52px;animation:flower-sway 5s ease-in-out infinite;animation-delay:1s">🌲</span>
+
+    <!-- Main characters -->
+    <!-- Dino left -->
+    <div style="position:absolute;bottom:52px;left:4%">
+      <div class="char-bubble" style="bottom:62px;left:0">Yo! 👋</div>
+      <span style="font-size:58px;animation:char-bounce 3s ease-in-out infinite;display:block">🦖</span>
+    </div>
+
+    <!-- Cat middle-left -->
+    <div style="position:absolute;bottom:52px;left:30%">
+      <div class="char-bubble" style="bottom:56px;left:0">Meow~ 🐾</div>
+      <span style="font-size:44px;animation:char-bounce 3s ease-in-out infinite;animation-delay:0.6s;display:block">🐱</span>
+    </div>
+
+    <!-- Bunny middle-right -->
+    <div style="position:absolute;bottom:52px;right:30%">
+      <div class="char-bubble" style="bottom:56px;right:0">Hi hi! 🥕</div>
+      <span style="font-size:44px;animation:char-bounce 3s ease-in-out infinite;animation-delay:1s;display:block">🐰</span>
+    </div>
+
+    <!-- Dog right -->
+    <div style="position:absolute;bottom:52px;right:4%">
+      <div class="char-bubble" style="bottom:60px;right:0">Woof! 🐾</div>
+      <span style="font-size:52px;animation:char-bounce 3s ease-in-out infinite;animation-delay:0.4s;display:block">🐶</span>
+    </div>
+
+    <!-- Frog on mushroom -->
+    <span class="doodle" style="bottom:82px;left:33%;font-size:22px;animation:char-bounce 2.5s ease-in-out infinite;animation-delay:0.8s">🐸</span>
+
+    <!-- Butterfly on ground -->
+    <span class="doodle" style="bottom:75px;right:34%;font-size:20px;animation:flutter 5s ease-in-out infinite;animation-delay:2s">🦋</span>
+
+    <!-- Hearts scattered -->
+    <span class="doodle" style="bottom:100px;left:50%;font-size:18px;animation:sparkle-pop 2s ease-in-out infinite">💗</span>
+    <span class="doodle" style="bottom:110px;left:44%;font-size:14px;animation:sparkle-pop 2s ease-in-out infinite;animation-delay:0.5s">💗</span>
+    <span class="doodle" style="bottom:110px;left:56%;font-size:14px;animation:sparkle-pop 2s ease-in-out infinite;animation-delay:1s">💗</span>
+
+    <!-- "Let's connect!" pill on ground -->
+    <div style="position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:white;border:2.5px solid #333;border-radius:50px;padding:7px 22px;font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:#333;box-shadow:3px 3px 0 #333;white-space:nowrap">
+      Let's connect! 🌟
+    </div>
+
+  </div>
 
   <!-- ── Page Content ── -->
   <div class="page">
@@ -367,7 +453,7 @@
         </div>
         <div class="btn-text">
           <span class="btn-name">YouTube</span>
-          <span class="btn-sub">Wala paakong youtube</span>
+          <span class="btn-sub">Wala pa akong YouTube 😅</span>
         </div>
         <div class="btn-arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -404,7 +490,6 @@
 
     </div>
 
-    <div class="connect-pill">Let's connect!</div>
     <div class="hearts">💗 💗 💗</div>
   </div>
 
