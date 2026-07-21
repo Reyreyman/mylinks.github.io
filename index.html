@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Links 🚀</title>
+  <title>Jericho's Links</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #14102b;
-      --glow-cyan: #4deeff;
-      --glow-pink: #ff6bd6;
-      --glow-purple: #a86bff;
+      --bg: #262624;        /* Claude-style dark warm gray */
+      --bg-soft: #30302e;   /* card background */
+      --border: #3f3e3b;    /* subtle border */
+      --text: #f4f3ee;      /* off-white text */
+      --text-dim: #a8a6a0;  /* muted text */
     }
 
     html, body { height: 100%; }
@@ -20,85 +21,19 @@
     body {
       font-family: 'Nunito', sans-serif;
       min-height: 100vh;
-      color: #fff;
-
-      /* ── FALLBACK galaxy gradient (shows if background.jpg is missing) ── */
-      background:
-        radial-gradient(ellipse at 20% 15%, rgba(120, 80, 220, .45) 0%, transparent 50%),
-        radial-gradient(ellipse at 85% 70%, rgba(255, 90, 180, .30) 0%, transparent 45%),
-        radial-gradient(ellipse at 60% 30%, rgba(60, 160, 255, .25) 0%, transparent 50%),
-        linear-gradient(180deg, #0d0a2e 0%, #1b1250 45%, #2a1a66 75%, #3b2380 100%);
-      background-attachment: fixed;
+      color: var(--text);
+      background: var(--bg);
       overflow-x: hidden;
       position: relative;
-    }
-
-    /* ── YOUR IMAGE goes here — upload background.jpg next to index.html ── */
-    .bg-image {
-      position: fixed;
-      inset: 0;
-      background-image: url('background.jpg');
-      background-size: cover;
-      background-position: center;
-      z-index: 0;
-    }
-
-    /* subtle dark overlay so buttons stay readable on any image */
-    .bg-image::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center 40%, rgba(10,8,40,0.25) 0%, rgba(10,8,40,0.45) 100%);
-    }
-
-    /* ── CSS STARFIELD (fallback + extra sparkle on top of image) ── */
-    .stars {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .star {
-      position: absolute;
-      background: #fff;
-      border-radius: 50%;
-      animation: star-twinkle 3s ease-in-out infinite;
-    }
-    @keyframes star-twinkle {
-      0%, 100% { opacity: .9; transform: scale(1); }
-      50%      { opacity: .25; transform: scale(.7); }
-    }
-
-    .shooting-star {
-      position: fixed;
-      top: 12%;
-      left: -10%;
-      width: 90px;
-      height: 2.5px;
-      background: linear-gradient(90deg, transparent, #fff);
-      border-radius: 2px;
-      z-index: 1;
-      pointer-events: none;
-      transform: rotate(-20deg);
-      animation: shoot 7s linear infinite;
-      opacity: 0;
-    }
-    .shooting-star.s2 { top: 38%; animation-delay: 3.5s; }
-    @keyframes shoot {
-      0%   { transform: translateX(0) rotate(-20deg); opacity: 0; }
-      4%   { opacity: 1; }
-      14%  { transform: translateX(120vw) rotate(-20deg); opacity: 0; }
-      100% { transform: translateX(120vw) rotate(-20deg); opacity: 0; }
     }
 
     /* ════════ CONTENT ════════ */
     .page {
       position: relative;
-      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 56px 20px 70px;
+      padding: 64px 20px 70px;
       max-width: 460px;
       margin: 0 auto;
       min-height: 100vh;
@@ -107,44 +42,34 @@
     .title {
       font-family: 'Baloo 2', cursive;
       font-weight: 800;
-      font-size: clamp(38px, 9.5vw, 58px);
-      line-height: 1.05;
+      font-size: clamp(34px, 8.5vw, 50px);
+      line-height: 1.1;
       text-align: center;
       margin-bottom: 12px;
-      color: #fff;
-      text-shadow:
-        0 0 14px rgba(120, 200, 255, .9),
-        0 0 38px rgba(150, 110, 255, .7),
-        0 4px 0 rgba(10, 8, 40, .8);
+      color: var(--text);
     }
-    .title .grad {
-      background: linear-gradient(90deg, #ffd62e, #ff8ad6, #7adcff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      filter: drop-shadow(0 0 10px rgba(255, 160, 230, .55));
+    .title .accent {
+      color: #d97757; /* warm accent, Claude-ish orange */
     }
 
     .subtitle {
       font-weight: 700;
       font-size: clamp(13px, 3.6vw, 16px);
-      color: #dcd4ff;
-      background: rgba(28, 18, 70, .55);
-      border: 1.5px solid rgba(160, 130, 255, .5);
-      backdrop-filter: blur(6px);
+      color: var(--text-dim);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
       border-radius: 30px;
       padding: 7px 20px;
       margin-bottom: 40px;
       text-align: center;
-      box-shadow: 0 0 18px rgba(130, 90, 255, .25);
     }
 
-    /* ── neon glass cards ── */
+    /* ── link cards ── */
     .links {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
     }
 
     .card {
@@ -153,53 +78,45 @@
       align-items: center;
       gap: 14px;
       text-decoration: none;
-      border-radius: 22px;
+      border-radius: 18px;
       padding: 14px 16px;
-      background: rgba(22, 14, 58, .58);
-      backdrop-filter: blur(10px);
-      border: 2px solid var(--edge);
-      box-shadow:
-        0 0 18px var(--halo),
-        inset 0 0 22px rgba(255,255,255,.04);
-      transition: transform .18s ease, box-shadow .18s ease;
+      background: var(--bg-soft);
+      border: 1.5px solid var(--border);
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
     }
     .card:hover {
-      transform: translateY(-4px) scale(1.015);
-      box-shadow:
-        0 0 30px var(--halo-strong),
-        0 10px 30px rgba(0,0,0,.45),
-        inset 0 0 24px rgba(255,255,255,.06);
+      transform: translateY(-3px);
+      border-color: var(--edge);
+      background: #35342f;
     }
-    .card:active { transform: translateY(1px) scale(.99); }
+    .card:active { transform: translateY(1px); }
 
-    .yt { --edge: rgba(255, 95, 95, .85);  --halo: rgba(255, 70, 70, .35);  --halo-strong: rgba(255, 70, 70, .6); }
-    .li { --edge: rgba(80, 170, 255, .85); --halo: rgba(60, 150, 255, .35); --halo-strong: rgba(60, 150, 255, .6); }
-    .ig { --edge: rgba(255, 110, 200, .85);--halo: rgba(230, 80, 200, .35); --halo-strong: rgba(230, 80, 200, .6); }
+    .yt { --edge: #ff5f5f; }
+    .li { --edge: #4da3ff; }
+    .ig { --edge: #ff6ec7; }
 
     .card-icon {
-      width: 52px; height: 52px;
-      border-radius: 15px;
-      background: rgba(255,255,255,.95);
+      width: 50px; height: 50px;
+      border-radius: 14px;
+      background: #f4f3ee;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 0 14px var(--halo);
     }
-    .card-icon svg { width: 28px; height: 28px; }
+    .card-icon svg { width: 26px; height: 26px; }
 
     .card-text { flex: 1; min-width: 0; }
     .card-name {
       font-family: 'Baloo 2', cursive;
       font-weight: 800;
-      font-size: 21px;
-      color: #fff;
+      font-size: 20px;
+      color: var(--text);
       display: block;
       line-height: 1.05;
-      text-shadow: 0 0 10px var(--halo-strong);
     }
     .card-sub {
       font-weight: 700;
       font-size: 12.5px;
-      color: rgba(225, 218, 255, .85);
+      color: var(--text-dim);
       display: block;
       margin-top: 3px;
       white-space: nowrap;
@@ -208,98 +125,66 @@
     }
 
     .card-arrow {
-      width: 38px; height: 38px;
+      width: 36px; height: 36px;
       border-radius: 50%;
-      background: rgba(255,255,255,.12);
-      border: 1.5px solid rgba(255,255,255,.4);
+      background: transparent;
+      border: 1.5px solid var(--border);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      transition: transform .18s, background .18s;
+      transition: transform .15s, border-color .15s;
     }
-    .card:hover .card-arrow { transform: translateX(4px); background: rgba(255,255,255,.22); }
-    .card-arrow svg { width: 17px; height: 17px; }
-
-    /* tiny orbiting dot on each card */
-    .orbit-dot {
-      position: absolute;
-      top: -5px; right: 18px;
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: var(--edge);
-      box-shadow: 0 0 10px var(--halo-strong);
-      animation: orbit-pulse 2.4s ease-in-out infinite;
-    }
-    @keyframes orbit-pulse {
-      0%,100% { transform: scale(1); opacity: 1; }
-      50%     { transform: scale(1.5); opacity: .6; }
-    }
+    .card:hover .card-arrow { transform: translateX(3px); border-color: var(--edge); }
+    .card-arrow svg { width: 16px; height: 16px; }
 
     .pill {
-      margin-top: 42px;
+      margin-top: 40px;
       font-family: 'Baloo 2', cursive;
       font-weight: 800;
-      font-size: 16px;
-      color: #fff;
-      background: linear-gradient(90deg, rgba(168,107,255,.35), rgba(77,238,255,.3));
-      border: 1.5px solid rgba(170, 220, 255, .6);
-      backdrop-filter: blur(8px);
+      font-size: 15px;
+      color: var(--text);
+      background: var(--bg-soft);
+      border: 1.5px solid var(--border);
       border-radius: 50px;
-      padding: 11px 30px;
-      box-shadow: 0 0 22px rgba(120, 180, 255, .35);
-      animation: pill-float 5s ease-in-out infinite;
-    }
-    @keyframes pill-float {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-8px); }
+      padding: 10px 26px;
     }
 
     /* ════════ MOBILE ════════ */
     @media (max-width: 480px) {
-      .page { padding: 44px 16px 56px; }
+      .page { padding: 48px 16px 56px; }
       .card { padding: 12px 13px; gap: 12px; }
-      .card-icon { width: 46px; height: 46px; }
-      .card-icon svg { width: 24px; height: 24px; }
-      .card-name { font-size: 18.5px; }
+      .card-icon { width: 44px; height: 44px; }
+      .card-icon svg { width: 22px; height: 22px; }
+      .card-name { font-size: 18px; }
       .card-sub { font-size: 11.5px; }
-      .card-arrow { width: 34px; height: 34px; }
+      .card-arrow { width: 32px; height: 32px; }
     }
   </style>
 </head>
 <body>
 
-<!-- your generated image (background.jpg in same folder) -->
-<div class="bg-image"></div>
-
-<!-- CSS starfield sparkle layer -->
-<div class="stars" id="stars"></div>
-<div class="shooting-star"></div>
-<div class="shooting-star s2"></div>
-
 <div class="page">
 
-  <h1 class="title">MY <span class="grad">LINKS</span></h1>
-  <p class="subtitle">Connect with me across the galaxy! 🪐</p>
+  <h1 class="title">JERICHO'S <span class="accent">LINKS</span></h1>
+  <p class="subtitle">Connect with me on my other platforms</p>
 
   <div class="links">
 
-    <!-- YouTube -->
-    <a class="card yt" href="https://youtube.com" target="_blank" rel="noopener">
-      <span class="orbit-dot"></span>
+    <!-- GitHub -->
+    <a class="card yt" href="https://github.com/Reyreyman" target="_blank" rel="noopener">
       <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="#ee2b3a"><path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.3 2.8 12 2.8 12 2.8s-4.3 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.2.7 11.4v2.1C.7 15.7 1 17.9 1 17.9s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.7 22.1 12 22.1 12 22.1s4.3 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.1C23.3 9.2 23 7 23 7zm-13.5 8.9V8.1l8.1 3.9-8.1 3.9z"/></svg>
+        <svg viewBox="0 0 24 24" fill="#181717"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
       </div>
       <div class="card-text">
-        <span class="card-name">YouTube</span>
-        <span class="card-sub">Wala pa akong YouTube 😅</span>
+        <span class="card-name">GitHub</span>
+        <span class="card-sub">Check out my code!</span>
       </div>
       <div class="card-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f4f3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </a>
 
     <!-- LinkedIn -->
     <a class="card li" href="https://www.linkedin.com/in/jericho-huang-052682383/" target="_blank" rel="noopener">
-      <span class="orbit-dot"></span>
       <div class="card-icon">
         <svg viewBox="0 0 24 24" fill="#1268b3"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
       </div>
@@ -308,13 +193,12 @@
         <span class="card-sub">Let's connect professionally!</span>
       </div>
       <div class="card-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f4f3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </a>
 
     <!-- Instagram -->
     <a class="card ig" href="https://www.instagram.com/mr.yellow36/" target="_blank" rel="noopener">
-      <span class="orbit-dot"></span>
       <div class="card-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#e1306c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       </div>
@@ -323,33 +207,15 @@
         <span class="card-sub">See my life in pictures!</span>
       </div>
       <div class="card-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f4f3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </a>
 
   </div>
 
-  <div class="pill">Let's connect! ✨</div>
+  <div class="pill">Let's connect!</div>
 
 </div>
-
-<script>
-  // generate random twinkling stars
-  const starsEl = document.getElementById('stars');
-  const COUNT = 90;
-  for (let i = 0; i < COUNT; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = Math.random() * 2.4 + 0.8;
-    s.style.width = size + 'px';
-    s.style.height = size + 'px';
-    s.style.left = Math.random() * 100 + '%';
-    s.style.top = Math.random() * 100 + '%';
-    s.style.animationDelay = (Math.random() * 3) + 's';
-    s.style.animationDuration = (2 + Math.random() * 3) + 's';
-    starsEl.appendChild(s);
-  }
-</script>
 
 </body>
 </html>
